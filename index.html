@@ -145,7 +145,7 @@
             </div>
 
             <button
-              class="w-full bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+              class="w-full bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" 
             >
               Ajouter Monstre
             </button>
@@ -277,8 +277,18 @@
       Vue.createApp({
         data() {
           return {
-            monstres: JSON.parse(localStorage.getItem("monstres")) || []
-          };
+            monstres: JSON.parse(localStorage.getItem("monstres")) || [],
+            isEditing: false,
+          }
+        },
+
+        watch: {
+          monstres: {
+            handler(newValue, oldValue) {
+              localStorage.setItem("monstres", JSON.stringify(newValue));
+            },
+            deep: true,
+          },
         },
       }).mount("#app");
     </script>
